@@ -12,4 +12,4 @@
 *BeautifulSoup 4.12  
 *Reuquests 2.29  
 *RabbitMq como broker para celery  
-
+Están los requirements.txt con todo lo usado.
