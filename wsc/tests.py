@@ -13,9 +13,11 @@ class TestWebscrapper(TestCase):
         #posting url from form
         client = Client()
         response = client.post(reverse("home_inicio"),{"url_a_buscar":self.URL})
+
         #retrieve objects from database
         q = MainWebs.objects.all().first()
         self.assertEqual(q.url, self.URL)
+        #Basicamente, si funciona este test, funciona todo el proceso.
 
 
-
+    

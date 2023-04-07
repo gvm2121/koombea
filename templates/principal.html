@@ -24,7 +24,7 @@
     <tbody>
         {% for r in resultado %}
       <tr>
-        <td>{{ r.name }}</td>
+        <td><a href="{% url 'home_details' r.id %}">{{ r.name }}</a></td>
         <td>{{ r.url }}</td>
         <td>{{ r.total_links }}</td>
       </tr>

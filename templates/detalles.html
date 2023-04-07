@@ -1,5 +1,29 @@
 {% extends 'base.html' %}
 
 {% block principal %}
-<h1>detalles</h1>
+<h1>details</h1>
+
+{%if query %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">main</th>
+        <th scope="col">name</th>
+        <th scope="col">Links</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for r in query %}
+      <tr>
+        <td>{{ r.web_parent }}</a></td>
+        <td>{{ r.name_detail }}</td>
+        <td>{{ r.link_detail }}</td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <h3>No hay resultados mostrar</h3>
+  {% endif %}
 {% endblock %}
