@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block principal %}
+<h1>Webscrapper</h1>
+<form method="POST" action="{% url 'home_inicio' %}">{% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputUrl" class="form-label">Ingrese Url</label>
+      {{ form.url_a_buscar }}
+      <div id="emailHelp" class="form-text">Tu url será escrapeada.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Vamos!</button>
+  </form>
+
+  {%if resultado %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Url</th>
+        <th scope="col">Total links</th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        {% for r in resultado %}
+      <tr>
+        <td>{{ r.name }}</td>
+        <td>{{ r.url }}</td>
+        <td>{{ r.total_links }}</td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <h3>No hay resultados mostrar</h3>
+  {% endif %}
+{% endblock %}
+
