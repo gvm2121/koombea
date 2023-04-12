@@ -4,8 +4,9 @@ from wsc.models import *
 from celery import shared_task
 
 @shared_task
-def get_Links(URL):
-    q1 = MainWebs.objects.get(url=URL)
+def get_Links(URL,user):
+    print("***************user",user)
+    q1 = MainWebs.objects.get(url=URL,user = User.objects.get(id=user))
     try:
         r = requests.get(URL)        
     except requests.exceptions.RequestException as e:

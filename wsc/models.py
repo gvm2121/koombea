@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class MainWebs(models.Model):
+    user = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     name = models.CharField(blank=True,null=True,default="in progress")
     url = models.CharField(blank=True,null=True)
     total_links = models.CharField(blank=True,null=True, default="in progress")
