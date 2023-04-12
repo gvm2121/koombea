@@ -2,6 +2,7 @@
 
 {% block principal %}
 <h1>Webscrapper</h1>
+<a href="{% url 'home_logout' %}">logout</a>
 <form method="POST" action="{% url 'home_inicio' %}">{% csrf_token %}
     <div class="mb-3">
       <label for="exampleInputUrl" class="form-label">Ingrese Url</label>

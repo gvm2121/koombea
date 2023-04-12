@@ -4,8 +4,8 @@ from wsc.models import *
 from celery import shared_task
 
 @shared_task
-def get_Links(URL):
-    q1 = MainWebs.objects.get(url=URL)
+def get_Links(URL,user):
+    q1 = MainWebs.objects.get(url=URL,user = User.objects.get(pk = user))
     try:
         r = requests.get(URL)        
     except requests.exceptions.RequestException as e:
@@ -23,7 +23,6 @@ def get_Links(URL):
     q1.save()
     
     for link in links:
-        #import pdb;pdb.set_trace()
         if not link.get_text():
             DetailsWeb.objects.create(web_parent=q1,name_detail=str(titulo),link_detail=str(link))
         else:
