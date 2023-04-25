@@ -12,6 +12,8 @@
     <button type="submit" class="btn btn-primary">Vamos!</button>
   </form>
 
+  {% include 'pagination.html' %}
+  <p>Estamos en la pagina {{page}}</p>
   {%if resultado %}
   <table class="table">
     <thead>

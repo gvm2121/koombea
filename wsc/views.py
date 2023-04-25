@@ -5,6 +5,8 @@ from .models import MainWebs,DetailsWeb
 from .tasks import get_Links
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from . import utilidades
+
 
 @login_required
 def home_inicio(request):
@@ -15,15 +17,20 @@ def home_inicio(request):
             user = request.user
             url = form_.cleaned_data["url_a_buscar"]
             MainWebs.objects.create(url = url,user=user)
-            #import pdb;pdb.set_trace()
-            get_Links.delay(url,request.user.id)              
-        return render(request,'principal.html',{"form":form,"resultado":MainWebs.objects.filter(user=request.user)})
-    return render(request,'principal.html',{"form":form,"resultado":MainWebs.objects.filter(user=request.user)})
+            get_Links.delay(url,request.user.id)
+            total = MainWebs.objects.filter(user=request.user).order_by("-id")
+            paginas = utilidades.get_paginator(total, request)              
+        return render(request,'principal.html',{"form":form,"resultado":paginas[0], "total":total, "numeros":paginas[1],"page":paginas[2]})
+    total = MainWebs.objects.filter(user=request.user).order_by("-id")
+    paginas = utilidades.get_paginator(total, request)
+    return render(request,'principal.html',{"form":form,"resultado":paginas[0], "total":total, "numeros":paginas[1],"page":paginas[2]})
+
 
 @login_required
 def home_detalles(request,id):
     q = DetailsWeb.objects.filter(web_parent=MainWebs.objects.get(id=id,user=request.user))
-    return render(request,'detalles.html',{"query":q})
+    paginas = utilidades.get_paginator(q, request,paginacion=10)
+    return render(request,'detalles.html',{"resultado":paginas[0],"numeros":paginas[1],"page":paginas[2]})
 
 
 def home_login(request):
