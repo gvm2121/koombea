@@ -1,0 +1,13 @@
+<div class="d-flex justify-content-center my-2">
+    <ul class="pagination">
+      {% if resultado.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ resultado.previous_page_number }}" title = "Pagina ">Anterior</a></li>
+      {% endif %}
+      {% for n in numeros %}
+      <li class="page-item"><a class="page-link" href="?page={{n}}">{{n}}</a></li>
+      {% endfor %}
+      {% if resultado.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ resultado.next_page_number }}" title = "Pagina Siguiente">Siguiente</a></li>
+      {% endif %}
+    </ul>
+</div>

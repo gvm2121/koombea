@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 
+
 {% block principal %}
+{% include 'pagination.html' %}
+<a href="{% url 'home_inicio' %}">home</a>
 <h1>details</h1>
 
-{%if query %}
+{%if resultado %}
   <table class="table">
     <thead>
       <tr>
@@ -14,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-        {% for r in query %}
+        {% for r in resultado %}
       <tr>
         <td>{{ r.web_parent }}</a></td>
         <td>{{ r.name_detail }}</td>
